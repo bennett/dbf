@@ -157,6 +157,14 @@ module DBF
       Record.new(self)
     end
     
+    def to_csv(filename = 'dump.csv')
+      FasterCSV.open(filename, 'w', :force_quotes => true) do |csv|
+        records.each do |r|
+          csv << r.to_a
+        end
+      end
+    end
+    
     private
     
       def open_memo(file)
